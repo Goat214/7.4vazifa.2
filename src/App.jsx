@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import MainLayout from "./Layout/MainLayout";
 
-import { ProtecRoutest} from "./components"
+import { ProtecRoutest } from "./components";
 import { useSelector } from "react-redux";
 
 import { Home, Login, Profile, Signup, SingleImage } from "./Pages";
@@ -22,9 +22,9 @@ function App() {
         </ProtecRoutest>
       ),
       children: [
-        
         {
           index: true,
+          path: "/",
           element: <Home />,
         },
         {

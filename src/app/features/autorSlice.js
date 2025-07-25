@@ -8,6 +8,7 @@ const initialState = {
     },
   ],
   isAuthenticated: false,
+  user: null, 
   error: "",
 };
 
@@ -23,6 +24,7 @@ const authSlice = createSlice({
 
       if (user) {
         state.isAuthenticated = true;
+        state.user = user;
         state.error = "";
       } else {
         state.error = "Email yoki parol noto‘g‘ri";
@@ -31,6 +33,7 @@ const authSlice = createSlice({
 
     logout: (state) => {
       state.isAuthenticated = false;
+      state.user = null; 
     },
 
     clearError: (state) => {
@@ -44,8 +47,10 @@ const authSlice = createSlice({
       if (existingUser) {
         state.error = "Bu email allaqachon mavjud";
       } else {
-        state.users.push({ email, password });
+        const newUser = { email, password };
+        state.users.push(newUser);
         state.isAuthenticated = true;
+        state.user = newUser; 
         state.error = "";
       }
     },
