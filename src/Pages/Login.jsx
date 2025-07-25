@@ -7,6 +7,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, error, } = useSelector((state) => state.auth);
+  const { user}= useSelector((state)=> state.user)
 
   const [form, setForm] = useState({
     email: "",

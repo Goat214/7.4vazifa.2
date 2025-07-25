@@ -17,14 +17,6 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = {
-      displayNickName,
-      displayName,
-      email,
-      password,
-      photoURL: photoURL || "https://via.placeholder.com/150",
-    };
-
     const exists = users.find((u) => u.email === email);
     if (exists) {
       alert("Bu email allaqachon ro'yxatdan o'tgan.");
@@ -42,146 +34,102 @@ function Signup() {
   };
 
   return (
-    <section style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h1 style={styles.title}>Ro‘yxatdan o‘tish</h1>
-
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Display Nickname:</label>
-          <input
-            type="text"
-            value={displayNickName}
-            onChange={(e) => setDisplayNickName(e.target.value)}
-            style={styles.input}
-            placeholder="Goat"
-          />
-        </div>
-
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Display Name:</label>
-          <input
-            type="text"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            style={styles.input}
-            placeholder="Abdulatif Kimsanaliyev"
-          />
-        </div>
-
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-            placeholder="example@mail.com"
-            required
-          />
-        </div>
-
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            placeholder="123123"
-            required
-          />
-        </div>
-
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Photo URL (optional):</label>
-          <input
-            type="text"
-            value={photoURL}
-            onChange={(e) => setPhotoURL(e.target.value)}
-            style={styles.input}
-            placeholder="https://example.com/photo.jpg"
-          />
-        </div>
-
-        <button type="submit" style={styles.button}>
+    <section
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{
+        backgroundImage: `url("https://images.unsplash.com/photo-1517502166878-35c93a0072bb?auto=format&fit=crop&w=1600&q=80")`,
+      }}
+    >
+      <div className="w-full max-w-md bg-white/30 backdrop-blur-md shadow-xl rounded-2xl p-8">
+        <h1 className="text-3xl font-bold text-center text-white mb-6">
           Ro‘yxatdan o‘tish
-        </button>
+        </h1>
 
-        <p style={styles.loginLink}>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-white mb-1">
+              Display Nickname
+            </label>
+            <input
+              type="text"
+              value={displayNickName}
+              onChange={(e) => setDisplayNickName(e.target.value)}
+              placeholder="Goat"
+              className="w-full px-4 py-2 border border-white bg-white/20 text-white placeholder-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-white mb-1">
+              Display Name
+            </label>
+            <input
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              placeholder="Abdulatif Kimsanaliyev"
+              className="w-full px-4 py-2 border border-white bg-white/20 text-white placeholder-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-white mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@mail.com"
+              required
+              className="w-full px-4 py-2 border border-white bg-white/20 text-white placeholder-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-white mb-1">
+              Parol
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="123123"
+              required
+              className="w-full px-4 py-2 border border-white bg-white/20 text-white placeholder-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-white mb-1">
+              Photo URL (ixtiyoriy)
+            </label>
+            <input
+              type="text"
+              value={photoURL}
+              onChange={(e) => setPhotoURL(e.target.value)}
+              placeholder="https://example.com/photo.jpg"
+              className="w-full px-4 py-2 border border-white bg-white/20 text-white placeholder-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
+          >
+            Ro‘yxatdan o‘tish
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-white text-sm">
           Akkauntingiz bormi?{" "}
-          <Link to="/login" style={styles.link}>
+          <Link to="/login" className="text-blue-200 hover:underline">
             Login
           </Link>
         </p>
-      </form>
+      </div>
     </section>
   );
 }
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    backgroundColor: "#f3f4f6",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-  },
-  form: {
-    backgroundColor: "#ffffff",
-    padding: "30px",
-    borderRadius: "10px",
-    boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
-    width: "100%",
-    maxWidth: "400px",
-  },
-  title: {
-    textAlign: "center",
-    fontSize: "24px",
-    fontWeight: "bold",
-    marginBottom: "25px",
-  },
-  formGroup: {
-    marginBottom: "15px",
-  },
-  label: {
-    display: "block",
-    marginBottom: "5px",
-    fontWeight: "600",
-    fontSize: "14px",
-    color: "#333",
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    fontSize: "16px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    outline: "none",
-    transition: "border-color 0.3s",
-  },
-  button: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#2563eb",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    fontWeight: "bold",
-    fontSize: "16px",
-    cursor: "pointer",
-    marginTop: "10px",
-  },
-  loginLink: {
-    marginTop: "15px",
-    textAlign: "center",
-    fontSize: "14px",
-  },
-  link: {
-    color: "#2563eb",
-    textDecoration: "underline",
-    marginLeft: "5px",
-  },
-};
 
 export default Signup;
