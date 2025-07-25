@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../app/features/autorSlice";
+import { login } from "../app/features/userSlice"; // To‘g‘ri reducerdan
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, error, } = useSelector((state) => state.auth);
-  const { user}= useSelector((state)=> state.user)
+
+  const { isAuthenticated, error } = useSelector((state) => state.user); // <-- auth emas, user
 
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/home"); 
-    }
-  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,7 +20,18 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(form));
+
+    const realUser = {
+      email: "goat52811@gmail.com",
+      password: "123456",
+    };
+
+    if (form.email === realUser.email && form.password === realUser.password) {
+      dispatch(login({ email: form.email }));
+      navigate("/home");
+    } else {
+      alert("Email yoki parol noto‘g‘ri!");
+    }
   };
 
   return (
@@ -47,9 +52,7 @@ function Login() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-white mb-1">
-              Email
-            </label>
+            <label className="block text-sm font-medium text-white mb-1">Email</label>
             <input
               type="email"
               name="email"
@@ -62,9 +65,7 @@ function Login() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white mb-1">
-              Parol
-            </label>
+            <label className="block text-sm font-medium text-white mb-1">Parol</label>
             <input
               type="password"
               name="password"
