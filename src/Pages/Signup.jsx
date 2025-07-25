@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../app/features/autorSlice"; 
+import { signup } from "../app/features/autorSlice";
 import { useNavigate, Link } from "react-router-dom";
 
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userData } = useSelector((state) => state.auth);
+  const { users } = useSelector((state) => state.auth);
 
   const [displayNickName, setDisplayNickName] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -25,14 +25,13 @@ function Signup() {
       photoURL: photoURL || "https://via.placeholder.com/150",
     };
 
-    // Check for duplicate email
-    const exists = userData.find((u) => u.email === email);
+    const exists = users.find((u) => u.email === email);
     if (exists) {
       alert("Bu email allaqachon ro'yxatdan o'tgan.");
       return;
     }
 
-    dispatch(signup(newUser));
+    dispatch(signup({ email, password }));
     navigate("/login");
 
     setDisplayNickName("");
@@ -43,11 +42,11 @@ function Signup() {
   };
 
   return (
-    <section>
-      <div style={styles.container}>
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <h1 style={styles.title}>Sign Up</h1>
+    <section style={styles.container}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h1 style={styles.title}>Ro‘yxatdan o‘tish</h1>
 
+        <div style={styles.formGroup}>
           <label style={styles.label}>Display Nickname:</label>
           <input
             type="text"
@@ -56,7 +55,9 @@ function Signup() {
             style={styles.input}
             placeholder="Goat"
           />
+        </div>
 
+        <div style={styles.formGroup}>
           <label style={styles.label}>Display Name:</label>
           <input
             type="text"
@@ -65,7 +66,9 @@ function Signup() {
             style={styles.input}
             placeholder="Abdulatif Kimsanaliyev"
           />
+        </div>
 
+        <div style={styles.formGroup}>
           <label style={styles.label}>Email:</label>
           <input
             type="email"
@@ -75,7 +78,9 @@ function Signup() {
             placeholder="example@mail.com"
             required
           />
+        </div>
 
+        <div style={styles.formGroup}>
           <label style={styles.label}>Password:</label>
           <input
             type="password"
@@ -85,7 +90,9 @@ function Signup() {
             placeholder="123123"
             required
           />
+        </div>
 
+        <div style={styles.formGroup}>
           <label style={styles.label}>Photo URL (optional):</label>
           <input
             type="text"
@@ -94,64 +101,86 @@ function Signup() {
             style={styles.input}
             placeholder="https://example.com/photo.jpg"
           />
+        </div>
 
-          <button type="submit" style={styles.button}>
-            Ro‘yxatdan o‘tish
-          </button>
-          <Link
-            to="/login"
-            style={{ color: "blue", textDecoration: "underline", marginTop: "10px" }}
-          >
+        <button type="submit" style={styles.button}>
+          Ro‘yxatdan o‘tish
+        </button>
+
+        <p style={styles.loginLink}>
+          Akkauntingiz bormi?{" "}
+          <Link to="/login" style={styles.link}>
             Login
           </Link>
-        </form>
-      </div>
+        </p>
+      </form>
     </section>
   );
 }
 
 const styles = {
   container: {
-    height: "100vh",
-    display: "grid",
-    placeItems: "center",
+    minHeight: "100vh",
     backgroundColor: "#f3f4f6",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
   },
   form: {
-    width: "360px",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     padding: "30px",
-    borderRadius: "8px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
+    borderRadius: "10px",
+    boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
+    width: "100%",
+    maxWidth: "400px",
   },
   title: {
     textAlign: "center",
-    fontSize: "2rem",
-    fontWeight: "700",
+    fontSize: "24px",
+    fontWeight: "bold",
+    marginBottom: "25px",
+  },
+  formGroup: {
+    marginBottom: "15px",
   },
   label: {
+    display: "block",
+    marginBottom: "5px",
     fontWeight: "600",
-    fontSize: "0.9rem",
+    fontSize: "14px",
+    color: "#333",
   },
   input: {
-    padding: "8px",
-    fontSize: "1rem",
-    borderRadius: "4px",
+    width: "100%",
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "5px",
     border: "1px solid #ccc",
+    outline: "none",
+    transition: "border-color 0.3s",
   },
   button: {
-    padding: "10px",
+    width: "100%",
+    padding: "12px",
     backgroundColor: "#2563eb",
     color: "#fff",
-    fontWeight: "600",
     border: "none",
     borderRadius: "5px",
+    fontWeight: "bold",
+    fontSize: "16px",
     cursor: "pointer",
-    fontSize: "1rem",
     marginTop: "10px",
+  },
+  loginLink: {
+    marginTop: "15px",
+    textAlign: "center",
+    fontSize: "14px",
+  },
+  link: {
+    color: "#2563eb",
+    textDecoration: "underline",
+    marginLeft: "5px",
   },
 };
 
