@@ -100,18 +100,7 @@ function Signup() {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-white mb-1">
-              Photo URL (ixtiyoriy)
-            </label>
-            <input
-              type="text"
-              value={photoURL}
-              onChange={(e) => setPhotoURL(e.target.value)}
-              placeholder="https://example.com/photo.jpg"
-              className="w-full px-4 py-2 border border-white bg-white/20 text-white placeholder-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-            />
-          </div>
+         
 
           <button
             type="submit"

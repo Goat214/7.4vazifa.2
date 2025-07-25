@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../app/features/userSlice"; // To‘g‘ri reducerdan
+import { login } from "../app/features/userSlice"; 
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, error } = useSelector((state) => state.user); // <-- auth emas, user
+  const {  error } = useSelector((state) => state.user); 
 
   const [form, setForm] = useState({
     email: "",
